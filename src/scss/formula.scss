@@ -1,0 +1,31 @@
+@import 'mixins.scss';
+@import 'variables.scss';
+
+.excel__formula {
+  height: $formula-height;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: $header-height + $toolbar-height;
+  border-bottom: 1px solid $border-color;
+  display: flex;
+  align-items: center;
+
+  .info {
+    text-align: center;
+    min-width: $info-cell-width;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: bold;
+    border-right: 1px solid $border-color;
+  }
+
+  .input {
+    padding: 4px;
+    font-size: 12px;
+    outline: none;
+    height: 100%;
+    width: 100%;
+    color: #000;
+  }
+}
