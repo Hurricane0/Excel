@@ -8,7 +8,6 @@ function toCol(letter) {
     <div class="column">${letter}</div>
   `;
 }
-
 function toCell() {
   return `
     <div class="cell" contenteditable>B1</div>
