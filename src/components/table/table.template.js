@@ -10,7 +10,7 @@ function toCol(letter) {
 }
 function toCell() {
   return `
-    <div class="cell" contenteditable>B1</div>
+    <div class="cell" contenteditable></div>
   `;
 }
 
