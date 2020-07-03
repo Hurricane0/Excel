@@ -22,7 +22,7 @@ function toRow(content = '', index = '') {
     ? `<div class="row-resize" data-resize="row"></div>`
     : '';
   return `
-    <div class="row">
+    <div class="row" data-type="resizable">
       <div class="row-info">
         ${index}
         ${resize}

@@ -50,6 +50,20 @@ class Dom {
   findAll(selector) {
     return this.$el.querySelectorAll(selector);
   }
+
+  set height(value) {
+    this.$el.style.height = value;
+  }
+
+  set width(value) {
+    this.$el.style.width = value;
+  }
+
+  css(styles) {
+    Object.keys(styles).map(key => {
+      this.$el.style[key] = styles[key];
+    });
+  }
 }
 
 export function $(selector) {
