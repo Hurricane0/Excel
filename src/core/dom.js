@@ -34,6 +34,18 @@ class Dom {
       this.$el.appendChild(node.$el);
     }
   }
+
+  closest(selector) {
+    return $(this.$el.closest(selector));
+  }
+
+  getCoords() {
+    return this.$el.getBoundingClientRect();
+  }
+
+  getDataset() {
+    return this.$el.dataset;
+  }
 }
 
 export function $(selector) {

@@ -5,7 +5,7 @@ const CODES = {
 
 function toCol(letter) {
   return `
-    <div class="column">
+    <div class="column" data-type="resizable">
       ${letter}
       <div class="col-resize" data-resize="col"></div>
     </div>
