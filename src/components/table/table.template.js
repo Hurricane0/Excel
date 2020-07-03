@@ -5,7 +5,10 @@ const CODES = {
 
 function toCol(letter) {
   return `
-    <div class="column">${letter}</div>
+    <div class="column">
+      ${letter}
+      <div class="col-resize" data-resize="col"></div>
+    </div>
   `;
 }
 function toCell() {
@@ -14,10 +17,16 @@ function toCell() {
   `;
 }
 
-function toRow(content = '', number = '') {
+function toRow(content = '', index = '') {
+  const resize = index
+    ? `<div class="row-resize" data-resize="row"></div>`
+    : '';
   return `
     <div class="row">
-      <div class="row-info">${number}</div>
+      <div class="row-info">
+        ${index}
+        ${resize}
+      </div>
       <div class="row-data">${content}</div>
     </div>
   `;
