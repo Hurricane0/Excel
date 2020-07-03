@@ -20,11 +20,18 @@ export class Table extends ExcelComponent {
       const $resizer = $(event.target);
       const $parent = $resizer.closest('[data-type="resizable"]');
       const coords = $parent.getCoords();
+      const colNumber = $parent.getDataset().col;
+      const elements = document.querySelectorAll(`[data-col="${colNumber}"]`);
 
       document.onmousemove = e => {
         const delta = e.pageX - coords.right;
         const value = coords.width + delta;
+        // TODO: createa method in DOM class
         $parent.$el.style.width = value + 'px';
+
+        elements.forEach(el => {
+          el.style.width = value + 'px';
+        });
       };
 
       document.onmouseup = () => {
@@ -32,10 +39,4 @@ export class Table extends ExcelComponent {
       };
     }
   }
-
-  // onMouseup(event) {
-  //   document.removeEventListener('mousemove', e => {
-  //     console.log(e);
-  //   });
-  // }
 }
