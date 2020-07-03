@@ -21,7 +21,7 @@ export class Table extends ExcelComponent {
       const $parent = $resizer.closest('[data-type="resizable"]');
       const coords = $parent.getCoords();
       const colNumber = $parent.getDataset().col;
-      const elements = document.querySelectorAll(`[data-col="${colNumber}"]`);
+      const cells = this.$root.findAll(`[data-col="${colNumber}"]`);
 
       document.onmousemove = e => {
         const delta = e.pageX - coords.right;
@@ -29,7 +29,7 @@ export class Table extends ExcelComponent {
         // TODO: createa method in DOM class
         $parent.$el.style.width = value + 'px';
 
-        elements.forEach(el => {
+        cells.forEach(el => {
           el.style.width = value + 'px';
         });
       };
