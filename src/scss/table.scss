@@ -60,7 +60,7 @@
     color: #111;
     white-space: nowrap;
 
-    &.active {
+    &.selected {
       border: none;
       outline: 2px solid $blue;
       z-index: 2;
