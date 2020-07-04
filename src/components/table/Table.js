@@ -17,9 +17,12 @@ export class Table extends ExcelComponent {
     return createTable();
   }
 
+  prepare() {
+    this.selection = new TableSelection();
+  }
+
   init() {
     super.init();
-    this.selection = new TableSelection();
     this.$cell = this.$root.find('[data-id="0:0"]');
     this.selection.select(this.$cell);
   }
