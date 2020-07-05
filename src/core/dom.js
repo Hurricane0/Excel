@@ -27,6 +27,11 @@ class Dom {
     return this;
   }
 
+  focus() {
+    this.$el.focus();
+    return this;
+  }
+
   append(node) {
     if (Element.prototype.append) {
       this.$el.append(node.$el);
@@ -67,6 +72,17 @@ class Dom {
 
   removeClass(className) {
     this.$el.classList.remove(className);
+  }
+
+  id(parse) {
+    if (parse) {
+      const parsed = this.id().split('');
+      return {
+        row: +parsed[0],
+        col: +parsed[2],
+      };
+    }
+    return this.$el.dataset.id;
   }
 }
 
