@@ -4,7 +4,7 @@ import { handleResize } from './table.resize';
 import { shouldResize, isCell } from './table.functions';
 import { TableSelection } from './TableSelection';
 import { $ } from '../../core/dom';
-import { matrix } from '../../core/utils';
+import { matrix, nextSelector } from '../../core/utils';
 
 export class Table extends ExcelComponent {
   static className = 'excel__table';
@@ -12,7 +12,7 @@ export class Table extends ExcelComponent {
   constructor($root, options) {
     super($root, {
       name: 'Table',
-      listeners: ['mousedown', 'keydown'],
+      listeners: ['mousedown', 'keydown', 'input'],
       ...options,
     });
   }
@@ -27,11 +27,15 @@ export class Table extends ExcelComponent {
 
   init() {
     super.init();
+    this.selectCell(this.$root.find('[data-id="0:0"]'));
 
-    this.$cell = this.$root.find('[data-id="0:0"]');
-    this.selection.select(this.$cell);
+    this.$on('formula:input', text => this.selection.current.text(text));
+    this.$on('formula:done', () => this.selection.current.focus());
+  }
 
-    this.emitter.subscribe('input', text => this.selection.current.text(text));
+  selectCell($cell) {
+    this.selection.select($cell);
+    this.$emit('table:select', $cell);
   }
 
   onMousedown(event) {
@@ -46,7 +50,7 @@ export class Table extends ExcelComponent {
 
         this.selection.selectGroup($cells);
       } else {
-        this.selection.select($target);
+        this.selectCell($target);
       }
     }
   }
@@ -66,30 +70,11 @@ export class Table extends ExcelComponent {
       event.preventDefault();
       const id = this.selection.current.id(true);
       const $next = this.$root.find(nextSelector(key, id));
-      this.selection.select($next);
+      this.selectCell($next);
     }
   }
-}
 
-function nextSelector(key, { col, row }) {
-  const MIN_VALUE = 0;
-  switch (key) {
-    case 'Enter':
-    case 'ArrowDown':
-      row++;
-      break;
-    case 'Tab':
-    case 'ArrowRight':
-      col++;
-      break;
-    case 'ArrowLeft':
-      col = col - 1 < MIN_VALUE ? MIN_VALUE : col - 1;
-      break;
-    case 'ArrowUp':
-      row = row - 1 < MIN_VALUE ? MIN_VALUE : row - 1;
-      break;
-    default:
-      break;
+  onInput(event) {
+    this.$emit('table:input', $(event.target).text());
   }
-  return `[data-id="${row}:${col}"]`;
 }
