@@ -4,7 +4,7 @@ export class Emitter {
   }
   // table.emit('table:select', {a: 1})
   emit(event, ...args) {
-    if (Array.isArray(this.listeners[event])) {
+    if (!Array.isArray(this.listeners[event])) {
       return false;
     }
     this.listeners[event].forEach(listener => {

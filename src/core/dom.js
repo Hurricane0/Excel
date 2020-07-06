@@ -14,6 +14,10 @@ class Dom {
     return this.$el.outerHTML;
   }
 
+  text(text) {
+    this.$el.textContent = text;
+  }
+
   on(eventType, callback) {
     this.$el.addEventListener(eventType, callback);
   }
