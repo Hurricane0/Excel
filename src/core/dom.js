@@ -58,7 +58,7 @@ class Dom {
     return this.$el.getBoundingClientRect();
   }
 
-  getDataset() {
+  get data() {
     return this.$el.dataset;
   }
 
