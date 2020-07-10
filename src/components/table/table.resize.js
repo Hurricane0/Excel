@@ -43,7 +43,8 @@ export const handleResize = ($root, event) => {
 
       resolve({
         value,
-        id: type === 'col' ? $parent.data.col : null,
+        type,
+        id: $parent.data[type],
       });
 
       document.onmousemove = null;
