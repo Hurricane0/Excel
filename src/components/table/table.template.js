@@ -16,14 +16,17 @@ function toCol({ col, index, width }) {
 }
 function toCell(state, row) {
   return function (_, col) {
+    const width = getWidth(state.colState, col);
+    const id = `${row}:${col}`;
+    const data = state.dataState[id];
     return `
     <div class="cell"
       contenteditable
       data-col="${col}" 
-      data-id="${row}:${col}"
+      data-id="${id}"
       data-type="cell"
-      style="width: ${getWidth(state, col)}"
-    ></div>
+      style="width: ${width}"
+    >${data || ''}</div>
   `;
   };
 }
@@ -81,7 +84,7 @@ export function createTable(rowsCount = 15, state = {}) {
   for (let row = 0; row < rowsCount; row++) {
     const cells = new Array(colsCount)
       .fill('')
-      .map(toCell(state.colState, row))
+      .map(toCell(state, row))
       .join('');
     rows.push(toRow(cells, state.rowState, row + 1));
   }
