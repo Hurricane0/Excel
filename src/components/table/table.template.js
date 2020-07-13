@@ -16,6 +16,7 @@ function toCol({ col, index, width }) {
     </div>
   `;
 }
+
 function toCell(state, row) {
   return function (_, col) {
     const width = getWidth(state.colState, col);
