@@ -1,3 +1,6 @@
+import { defaultStyles } from '../../constants';
+import { camelToDashCase } from '../../core/utils';
+
 const CODES = {
   A: 65,
   Z: 90,
@@ -19,13 +22,16 @@ function toCell(state, row) {
     const width = getWidth(state.colState, col);
     const id = `${row}:${col}`;
     const data = state.dataState[id];
+    const styles = Object.keys(defaultStyles)
+      .map(key => `${[camelToDashCase(key)]}: ${defaultStyles[key]}`)
+      .join(';');
     return `
     <div class="cell"
       contenteditable
       data-col="${col}" 
       data-id="${id}"
       data-type="cell"
-      style="width: ${width}"
+      style="${styles}; width: ${width}"
     >${data || ''}</div>
   `;
   };

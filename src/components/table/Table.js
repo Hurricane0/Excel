@@ -42,8 +42,9 @@ export class Table extends ExcelComponent {
   selectCell($cell) {
     this.selection.select($cell);
     this.$emit('table:select', $cell);
-
-    console.log($cell.getStyles(Object.keys(defaultStyles)));
+    const styles = $cell.getStyles(Object.keys(defaultStyles));
+    console.log('styles', styles);
+    this.$dispatch(actions.changeStyles(styles));
   }
 
   async resizeTable(event) {
