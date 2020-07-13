@@ -36,14 +36,21 @@ export class Table extends ExcelComponent {
       this.updateTextInStore(text);
     });
     this.$on('formula:done', () => this.selection.current.focus());
-    this.$on('toolbar:applyStyle', style => this.selection.applyStyle(style));
+    this.$on('toolbar:applyStyle', value => {
+      this.selection.applyStyle(value);
+      this.$dispatch(
+        actions.applyStyles({
+          value,
+          ids: this.selection.selectedIds,
+        })
+      );
+    });
   }
 
   selectCell($cell) {
     this.selection.select($cell);
     this.$emit('table:select', $cell);
     const styles = $cell.getStyles(Object.keys(defaultStyles));
-    console.log('styles', styles);
     this.$dispatch(actions.changeStyles(styles));
   }
 
