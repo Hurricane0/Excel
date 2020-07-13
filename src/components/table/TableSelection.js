@@ -5,7 +5,7 @@ export class TableSelection {
     this.group = [];
     this.current = null;
   }
-  // $el instanceof Dom === true
+
   select($el) {
     this.clear();
     this.group.push($el);
@@ -17,10 +17,14 @@ export class TableSelection {
     this.group.forEach($el => $el.removeClass(TableSelection.className));
     this.group = [];
   }
-  // $group instanceof Dom === true
+
   selectGroup($group = []) {
     this.clear();
     this.group = $group;
-    this.group.forEach(el => el.addClass(TableSelection.className));
+    this.group.forEach($el => $el.addClass(TableSelection.className));
+  }
+
+  applyStyle(style) {
+    this.group.forEach($el => $el.css(style));
   }
 }
