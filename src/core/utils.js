@@ -67,7 +67,7 @@ export function camelToDashCase(str) {
 }
 
 export function toInlineStyles(styles = {}) {
-  Object.keys(styles)
+  return Object.keys(styles)
     .map(key => `${[camelToDashCase(key)]}: ${styles[key]}`)
     .join(';');
 }

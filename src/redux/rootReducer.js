@@ -1,5 +1,4 @@
 import { TABLE_RESIZE, CHANGE_TEXT, CHANGE_STYLES, APPLY_STYLE } from './types';
-import { toInlineStyles } from '../core/utils';
 
 export function rootReducer(state, action) {
   let field;
@@ -23,7 +22,7 @@ export function rootReducer(state, action) {
       field = 'stylesState';
       val = state[field] || {};
       action.data.ids.forEach(id => {
-        val[id] = toInlineStyles(action.data.value);
+        val[id] = { ...val[id], ...action.data.value };
       });
       return {
         ...state,
