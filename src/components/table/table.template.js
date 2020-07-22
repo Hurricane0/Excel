@@ -78,7 +78,7 @@ function withWidthFrom(state) {
   };
 }
 
-export function createTable(rowsCount = 15, state = {}) {
+export function createTable(rowsCount = 40, state = {}) {
   const colsCount = CODES.Z - CODES.A + 1;
 
   const rows = [];
