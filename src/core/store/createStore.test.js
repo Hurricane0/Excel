@@ -1,18 +1,65 @@
 import { createStore } from './createStore';
 
-const reducer = (state = 0, action) => {
+const initialState = {
+  count: 0,
+};
+
+const reducer = (state = initialState, action) => {
   if (action.type === 'ADD') {
-    return ++state;
+    return { ...state, count: state.count + 1 };
   }
   return state;
 };
 
 describe('Create Store:', () => {
+  let store;
+  let handler;
+
+  beforeEach(() => {
+    store = createStore(reducer, initialState);
+    handler = jest.fn();
+  });
+
   test('should return store object', () => {
-    const store = createStore(reducer);
     expect(store).toBeDefined();
     expect(store.dispatch).toBeDefined();
     expect(store.subscribe).toBeDefined();
     expect(store.getState).toBeDefined();
+  });
+
+  test('should return object as a state', () => {
+    expect(store.getState()).toBeInstanceOf(Object);
+  });
+
+  test('should return default state', () => {
+    expect(store.getState()).toEqual(initialState);
+  });
+
+  test('should change state if action exists', () => {
+    store.dispatch({ type: 'ADD' });
+    expect(store.getState()).not.toEqual(initialState);
+  });
+
+  test('should NOT change state if action does not exist', () => {
+    store.dispatch({ type: 'DIVIDE' });
+    expect(store.getState()).toEqual(initialState);
+  });
+
+  test('should call subscriber function', () => {
+    store.subscribe(handler);
+
+    store.dispatch({ type: 'ADD' });
+
+    expect(handler).toHaveBeenCalled();
+    expect(handler).toHaveBeenCalledWith(store.getState());
+  });
+
+  test('should NOT call sub if unsubscribe', () => {
+    const sub = store.subscribe(handler);
+    sub.unsubscribe();
+
+    store.dispatch({ type: 'ADD' });
+
+    expect(handler).not.toHaveBeenCalled();
   });
 });
