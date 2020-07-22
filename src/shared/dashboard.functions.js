@@ -38,8 +38,8 @@ export function createRecordsTable() {
 
   return `
     <div class="db__list-header">
-      <span>Название</span>
-      <span>Дата открытия</span>
+      <span>Title</span>
+      <span>Last opened</span>
     </div>
 
     <ul class="db__list">

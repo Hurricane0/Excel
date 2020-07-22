@@ -12,7 +12,7 @@ export class DashboardPage extends Page {
 
       <div class="db__new">
         <div class="db__viewport">
-          <a href="#excel/${now}" class="db__create">Новая<br />Таблица</a>
+          <a href="#excel/${now}" class="db__create">New<br />Table</a>
         </div>
       </div>
 
