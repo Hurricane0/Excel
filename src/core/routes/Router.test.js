@@ -1,21 +1,15 @@
 import { Router } from './Router';
-import { Page } from '../Page';
+import { Page } from '../page/Page';
 
 class DashboardPage extends Page {
   getRoot() {
     const root = document.createElement('div');
-    root.innerHTML = 'dashboard';
+    root.innerText = 'dashboard';
     return root;
   }
 }
 
-class ExcelPage extends Page {
-  getRoot() {
-    const root = document.createElement('div');
-    root.innerHTML = 'excel';
-    return root;
-  }
-}
+class ExcelPage extends Page {}
 
 describe('Router:', () => {
   let router;
